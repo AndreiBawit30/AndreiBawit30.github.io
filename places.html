@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paris</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        .container h1 {
+            font-family: 'Raleway';
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            font-size: 50px;
+        }
+
+        hr {
+            border: 0;
+            height: 3px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+
+        .thumbnail {
+            margin-bottom: 6px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .blur {
+            transform: scale(0.9);
+            opacity: 0.6;
+            filter: blur(2px);
+        }
+
+        .myFooter {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        footer {
+            background: #000;
+            font-family: 'Raleway', sans-serif;
+            color: rgb(0, 0, 0);
+            max-width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-icons {
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 5px;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            margin-top: 15px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: white;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:visited,
+        a:focus {
+            color: white;
+        }
+
+        footer a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modal-body img {
+            width: 100%;
+        }
+    </style>
+
+    <title>Photo Gallery</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500i,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/gallery.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="Images/tower.png" alt="Brand Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="places.html">Places</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-3" style="padding: 60px;">
+        <h1 style="color: #d32f2f; font-weight: bold; text-align: center; font-size: 3em; font-family: 'Georgia', serif;">
+            TOP SITE TO VISIT
+        </h1>
+
+        <p style="font-family: 'Arial', sans-serif; font-size: 1.2em; line-height: 1.6; padding: 60px;">
+            Paris is truly a world city. Known for its romantic ambience, it has inspired artists and dreamers
+            throughout the ages with its rich culture, grand architecture, wide boulevards and iconic landmarks, such as
+            the Eiffel Tower.
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row" id="gallery-container"></div>
+    </div>
+
+    <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        const images = [
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_302511917.jpg",
+                title: "Eiffel Tower",
+                description: "The Eiffel Tower is, without doubt, the most recognisable landmark in Paris and is one of the most visited monuments in the whole world, attracting nearly 7 million visitors a year. Depending on how much time you have, you can choose to pose for a snap by visiting the park at its base or head up the tower itself. Don’t forget to book in advance, as it’s very popular! It has three platforms, with bars and restaurants where you can fortify yourself for the 1665 steps to the third floor for the most impressive panoramic views over Paris."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_750035404.jpg",
+                title: "Arc of Triumph",
+                description: "This huge triumphal arch is another of the most recognisable symbols of Paris. It was built in the 19th century by Napoleon to commemorate the glory of his success on the battlefield. The sculptures which decorate the pillars were created by French sculptors, and at its base is the tomb of the unknown soldier. If you climb the 234 steps to the top of the arch, you will be rewarded with splendid views along the Champs Elysées towards the Sacré Coeur."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_615993713.jpg",
+                title: "Palace of Versailles",
+                description: "This grand 17th century palace was built to demonstrate the wealth and power of the French court, although its opulence subsequently came to represent its excesses. The Château de Versaille is no less impressive today with its lavish decoration and beautiful works of Renaissance art. Explore the State Apartments and the dazzling Hall of Mirrors. It is built in the Baroque style and surrounded by magnificent formal gardens, which cover some 800 hectares, displaying canals, water features and statues. It is closed on Mondays."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_167725478.jpg",
+                title: "Louvre Museum",
+                description: "The Louvre is the world’s largest art museum, as well as being its most popular. It houses some 35,000 works of art, displayed in a series of stunning buildings, stretching over 60,000 square metres. The Louvre Palace was originally built as a castle, by Philip II, in the late 12th century and its latest addition is Pei’s glass pyramid. Explore ancient Oriental, Greek, Roman, Egyptian and Etruscan relics as well as graphic and Islamic arts and western works dating from the Middle Ages up to 1848. Opening hours vary and it is often less crowded in the evenings."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_342081257.jpg",
+                title: "Notre Dame Cathedral",
+                description: "This imposing Gothic Cathedral is one of the most iconic buildings in Paris. It is a Roman Catholic cathedral set on the eastern part of the Ile de la Cité, and is recognised as one of the best examples of French Gothic architecture in Europe. Its construction began in 1163 and it took almost 200 years to build. It is adorned with sculptures, gargoyles and stunning stained glass. A climb up the towers is well worth it for the stunning panoramic views of Paris below."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_391771837.jpg",
+                title: "Musée d’Orsay",
+                description: "This museum is a must-see for fans of 19th and early 20th century art. It houses works of art by the masters of the impressionist and post-impressionist movements, including Degas, Monet, Manet, Renoir, Gauguin, Cézanne, Seurat, Sisley and Van Gogh. Appropriately enough, it is situated in the former Gare d’Orsay, a Beaux-Arts railway station dating back to 1898, at the heart of the period during which many of these works of art were created. It is situated on the Left Bank of the Seine in the 7th arrondissement. From the top of the building you can enjoy beautiful views over the Sacré Coeur through the museum’s transparent clock. It is closed on Mondays."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_647217538.jpg",
+                title: "Grand Palais National Galleries",
+                description: "This museum and cultural centre is actually home to three different venues: the 240 metre long nave, which plays host to a diverse variety of French and international events, the National Galleries which display major art exhibitions and the Palais de la Découverte or ‘Palace of Discovery’, a museum and cultural centre dedicated to science. The building itself is recognised as an architectural masterpiece, which was built for the Exposition Universelle in 1900. It was designed in the Beaux-Arts style, built from stone, steel and glass with a distinctive steel-framed roof and topped by an iconic, large, glass dome. As such it is, perhaps, one of the most easily recognisable buildings in Paris. It is closed on Tuesdays."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_146185127.jpg",
+                title: "Jardin des Plantes",
+                description: "This impressive botanical garden is the most important in France. It stretches over some 28 hectares and is home to four museums, including the Natural History Museum, which houses a variety of African animals including a stuffed rhinoceros dating back to 1770; the oldest in the world. The gardens themselves boast thousands of species of plants, and are carefully laid out with graceful, tree-lined avenues, elegant parterres, hidden grottoes and mazes. This is a lovely place to relax and explore the beautiful surroundings. It is also home to a fully functioning botanical school."
+            },
+            {
+                src: "https://paris.com/wp-content/uploads/2018/10/shutterstock_212097754.jpg",
+                title: "Luxembourg Gardens",
+                description: "These beautiful gardens were first laid out in 1612 as the gardens of the Luxembourg Palace, and stretch over 25 hectares of land. They encompass a geometric forest, French and English style gardens, as well as a large pond. You can easily spend a whole day here, exploring the apple orchards, with their rare species of apples, the apiary, rose gardens and exotic greenhouses. There is so much to see and do with activities especially for children, such as slides, rides and puppet shows, as well as leisure and sporting activities for adults. The gardens are home to more than one hundred sculptures, amongst which is a replica of the Statue of Liberty, and are a lovely place to spend a sunny afternoon."
+            }
+        ];
+
+        const galleryContainer = document.getElementById('gallery-container');
+
+        images.forEach((image) => {
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col-lg-4 col-sm-6';
+
+            const thumbnailDiv = document.createElement('div');
+            thumbnailDiv.className = 'thumbnail img-responsive';
+
+            const link = document.createElement('a');
+            link.href = '#';
+            link.title = image.title;
+
+            const img = document.createElement('img');
+            img.src = image.src;
+
+            link.appendChild(img);
+            thumbnailDiv.appendChild(link);
+            colDiv.appendChild(thumbnailDiv);
+            galleryContainer.appendChild(colDiv);
+        });
+
+        $('.thumbnail').click(function (event) {
+            event.preventDefault();
+            const imgIndex = $(this).parent().index();
+
+            const selectedImage = images[imgIndex];
+
+            $('.modal-body').empty();
+
+            const imgClone = $('<img>').attr('src', selectedImage.src).addClass('img-fluid');
+
+            const title = $('<h4>').text(selectedImage.title)
+                .css({
+                    color: '#d32f2f',
+                    fontWeight: 'normal',
+                    textAlign: 'center',
+                    fontSize: '3em',
+                    fontFamily: "'Georgia', serif"
+                });
+
+            const description = $('<p>').text(selectedImage.description)
+                .css({
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '1.2em',
+                    lineHeight: '1.6',
+                    padding: '20px'
+                });
+
+            $('.modal-body').append(imgClone, title, description);
+            $('#modal').modal({ show: true });
+        });
+
+        $('#modal').on('show.bs.modal', function () {
+            $('.col-6,.row .thumbnail').addClass('blur');
+        });
+
+        $('#modal').on('hide.bs.modal', function () {
+            $('.col-6,.row .thumbnail').removeClass('blur');
+        });
+    </script>
+</body>
+
+</html>
