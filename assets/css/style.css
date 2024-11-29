@@ -154,6 +154,20 @@ img {
     color: var(--c-brand);
     font-size: 34px;
     flex: none;
+    
+}
+
+.contactBox{
+    width: 70px;
+    height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-brand);
+    font-size: 34px;
+    flex: none;
+
+    
 }
 
 /* service */
